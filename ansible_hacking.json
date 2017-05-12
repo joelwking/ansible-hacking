@@ -1,0 +1,9 @@
+{"dashboard": "dashboard.meraki.com",
+ "organization": "WWTINC",
+ "api_key": "bf81478redactedc313c87a1",
+ "action": "add",
+ "network": "TELEWORKER",
+ "id": "1492",
+ "name": "NET3",
+ "applianceIp": "203.0.113.1",
+ "subnet": "203.0.113.0/24"}
