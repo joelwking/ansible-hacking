@@ -206,52 +206,7 @@ Additionally, we can successfully run `ansible-doc`.
 
   Manage VLANs on Meraki Networks
 
-Options (= is mandatory):
-
-- action
-        desired action, add, delete, update, default is add
-        [Default: (null)]
-= api_key
-        the API key for the organization administrator under My Profile
-
-= applianceIp
-        The default gateway IP address, 192.0.2.1
-
-= dashboard
-        Meraki dashboard host name, e.g. dashboard.meraki.com
-
-= id
-        VLAN number
-
-= name
-        VLAN name
-
-= network
-        Name of the network
-
-= organization
-        organization name
-
-= subnet
-        Layer 3 network address of the VLAN, with mask 192.0.2.0/24
-
-Requirements:  ansible-meraki/Meraki_Connector.py from https://github.com/joelwking
-
-EXAMPLES:
-
-  - name: manage vlans
-    meraki_vlan:
-      dashboard: "{{inventory_hostname}}"
-      organization: "{{meraki.organization}}"
-      api_key: "{{meraki_params.apikey}}"
-      action: add                            # add, delete update
-      network: "{{meraki.network}}"          # Name of the network
-      id: "1492"                             # VLAN number
-      name: VLAN1492                         # VLAN name
-      applianceIp: "192.0.2.1"               # Default Gateway IP address
-      subnet: "192.0.2.0/24"                 # Layer 3 network address of the VLAN
-
-
+            [lines removed for breviety]
 
 MAINTAINERS: Joel W. King, (@joelwking) World Wide Technology
 
@@ -261,7 +216,6 @@ METADATA:
 ```
 
 ## Invoking with PyCharm Professional
-
 At this point, the only use of PyCharm was to upload the module(s) under development. Move the `ansible_hacking` module back to the library directory, and run the `meraki_vlan` using the remote Python interpreter feature. More on that configuration in a separate post.
 
 ```
@@ -280,6 +234,12 @@ Entered ansible_hacking, AnsibleModule
             "required": true
         }, 
 ```
+
+## Remote Debugging
+Remote [debugging](https://www.jetbrains.com/help/pycharm/2017.1/remote-debugging.html) can be enabled in PyCharm Pro and has been tested with the `ansible-hacking` module.
+
+
+
 ## References:
 
 * [Debug Ansible Modules remotely in PyCharm on windows](https://github.com/mmumshad/debug-ansible-modules-pycharm)
