@@ -1,15 +1,12 @@
 #!/usr/bin/env python
-#
 """
      Copyright (c) 2017 World Wide Technology, Inc.
      All rights reserved.
 
-     Revision history:
-     11 May 2017  |  1.0 - initial release
-                     1.1 - doc formatting
-
      module: ansible_hacking.py
+
      author: Joel W. King, (@joelwking) World Wide Technology
+
      short_description: A mock object to simulate the Ansible environment for remote debugging
      reference: http://docs.ansible.com/ansible/dev_guide/developing_modules_general.html
      description:  This code provides an alternative to using the Ansible hacking/test-module
@@ -21,6 +18,9 @@ class AnsibleModule(object):
     """ Mock class for testing Ansible modules outside of the Ansible framework.
     """
     INPUT_JSON = "ansible_hacking.json"
+    NO = ("n","N", "no", "No", "NO", "False", "FALSE", "false", "off", "Off", "OFF")
+    YES = ("y", "Y", "yes", "Yes", "YES", "True", "TRUE", "true", "on", "On", "ON")
+
 
     def __init__(self, **kwargs):
         """ Ansible internally saves arguments to an arguments file,
@@ -33,7 +33,7 @@ class AnsibleModule(object):
     def read_params(self, fname):
         """ Arguments for testing are read from JSON format file.
         """
-        print "loading params from %s" % fname
+
         try:
             jsonfile = open(fname, 'r')
         except IOError:
@@ -42,8 +42,16 @@ class AnsibleModule(object):
 
         infile = jsonfile.read()
         jsonfile.close()
+        
+        # BOOLEAN logic
+        params = json.loads(infile)
+        for key, value in params.items():
+            if value in AnsibleModule.NO:
+                params[key] = False
+            if value in AnsibleModule.YES:
+                params[key] = True
 
-        return json.loads(infile)
+        return params
 
     def exit_json(self, **kwargs):
         """ Modules return information to Ansible by printing a JSON string
